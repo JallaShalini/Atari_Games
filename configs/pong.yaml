@@ -1,0 +1,14 @@
+game: Pong-v5
+episodes: 100
+batch_size: 32
+learning_rate: 0.0001
+gamma: 0.99
+epsilon_start: 1.0
+epsilon_end: 0.01
+epsilon_decay: 0.995
+replay_buffer_size: 100000
+frame_size: 84
+frame_skip: 4
+update_target_frequency: 10
+model_path: models/best_model.pth
+device: cuda
