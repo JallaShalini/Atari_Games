@@ -1,0 +1,17 @@
+build:
+  command: |
+    docker build -t rl-agent-train -f docker/Dockerfile.train .
+    docker build -t rl-agent-inference -f docker/Dockerfile.inference .
+
+train:
+  command: |
+    docker run --rm -v $(pwd)/models:/app/models rl-agent-train python scripts/train.py --game Pong-v5 --episodes 100
+
+evaluate:
+  command: |
+    docker run --rm -v $(pwd)/models:/app/models rl-agent-train python scripts/evaluate.py --game Pong-v5 --episodes 100
+  output_parser: "AVERAGE_REWARD"
+
+play:
+  command: |
+    docker run --rm -v $(pwd)/models:/app/models -v $(pwd)/videos:/app/videos rl-agent-train python scripts/play.py --game Pong-v5 --episodes 5
